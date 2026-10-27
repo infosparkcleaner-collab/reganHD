@@ -1,0 +1,4 @@
+screenshots
+docs
+.playwright-mcp
+.env*.local
