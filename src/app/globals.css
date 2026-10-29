@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-body);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-head);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jbmono);
+  --font-heading: var(--font-archivo);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -55,7 +55,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #172b46;
+  --primary: #0b1424;
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -117,23 +117,78 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@theme inline {
+  --color-ink-950: #070d1a;
+  --color-ink-900: #0b1424;
+  --color-ink-800: #132036;
+  --color-ink-700: #1e2c45;
+  --color-steel-500: #5b6779;
+  --color-steel-300: #a9b2c0;
+  --color-steel-200: #d5dae2;
+  --color-steel-100: #eceff3;
+  --color-paper: #f7f8fa;
+  --color-text: #0e1726;
+  --color-blue-600: #17409a;
+  --color-blue-400: #6f93e6;
+  --color-red-600: #c8102e;
+  --color-red-700: #a50d26;
+  --font-display: var(--font-archivo);
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --shadow-1: 0 1px 2px rgba(7, 13, 26, 0.06), 0 1px 1px rgba(7, 13, 26, 0.04);
+  --shadow-2: 0 12px 32px -12px rgba(7, 13, 26, 0.28);
+}
+
 @layer base {
   * { @apply border-border outline-ring/50; }
-  html { @apply font-sans; scroll-behavior: smooth; }
-  body { @apply bg-white text-navy; font-size: 1.0625rem; line-height: 1.65; }
-  h1, h2, h3 { font-family: var(--font-head), system-ui, sans-serif; font-weight: 600; letter-spacing: -0.01em; }
-  .tnum { font-variant-numeric: tabular-nums; }
+  html { @apply font-sans; -webkit-font-smoothing: antialiased; }
+  body { background: var(--color-paper); color: var(--color-text); font-size: 1.0625rem; line-height: 1.65; }
+  h1, h2, h3, .display { font-family: var(--font-archivo), system-ui, sans-serif; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: #17409a; color: #fff; }
+  :focus-visible { outline: 2px solid #17409a; outline-offset: 2px; }
 }
 
-@theme inline {
-  --color-navy: #172b46;
-  --color-slate: #526173;
-  --color-rule: #dde2e7;
-  --color-paper: #f5f6f7;
-  --color-regan-blue: #17409a;
-  --color-regan-red: #c8102e;
-  --color-regan-red-dark: #a60d26;
-  --font-display: var(--font-head);
+/* Semi-expanded display cut, echoes the wide stencil lettering in the logo */
+.display-x { font-variation-settings: "wdth" 112; letter-spacing: -0.02em; }
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* Eyebrow: red tick + tracked caps */
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+.eyebrow::before { content: ""; width: 12px; height: 2px; background: #c8102e; flex: none; }
+
+/* 2% noise on dark surfaces so they never read as flat digital black. In a layer so position utilities (fixed etc.) still win. */
+@layer components {
+  .grain { isolation: isolate; } /* add `relative` (or fixed/absolute) on the element itself */
+.grain::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.05; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 }
 
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+/* Grade the two real photos so they sit with the generated set */
+.graded { filter: saturate(0.9) contrast(1.04); }
+
+/* Reveal on enter (see Reveal.tsx). Content is visible without JS. */
+.js [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 560ms var(--ease-out-soft), transform 560ms var(--ease-out-soft); transition-delay: var(--d, 0ms); }
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* Hero settle */
+@keyframes settle { from { transform: scale(1.06); } to { transform: scale(1); } }
+.settle { animation: settle 1600ms var(--ease-out-soft) both; }
+@keyframes draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.draw { animation: draw 600ms var(--ease-out-soft) 400ms both; }
+
+/* Image hover zoom inside a frame */
+.zoom img { transition: transform 700ms var(--ease-out-soft); }
+.zoom:hover img { transform: scale(1.04); }
+
+/* Underline that grows from the left */
+.ulink { background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat; transition: background-size 200ms ease; }
+.ulink:hover { background-size: 100% 1px; }
+.arrow { display: inline-block; transition: transform 200ms ease; }
+a:hover .arrow, button:hover .arrow { transform: translateX(3px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .settle, .draw { animation: none; }
+  .zoom img, .arrow { transition: none; }
+  .zoom:hover img { transform: none; }
+}

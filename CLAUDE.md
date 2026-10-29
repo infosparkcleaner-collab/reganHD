@@ -5,7 +5,7 @@ Reference sites from client: Marathon, Silverback, Matholdings (study for layout
 
 ## Status
 Client rebuilds heavy-duty **brake shoes** (sandblast, reline, rivet) and packs Marathon Stop Box Kits. They also run trucking.
-**This branch (`main`) is the classic client site**: static multi-page, no scroll animation. Pages: `/`, `/services`, `/products`, `/trucking`, `/contact` (quote form).
+**This branch (`main`) is the classic-but-premium client site** (v3): multi-page, dark photographic heroes, light motion only (reveal on enter, hover zoom). Brand system: `docs/brand-direction.md` (Archivo + Inter + JetBrains Mono; ink/steel neutrals; red only for primary CTAs; logo speed-bar device in `src/components/brand/SpeedRule.tsx`). Pages: `/`, `/services`, `/products`, `/trucking`, `/contact` (quote form).
 **The animated portfolio version** (pinned scroll story, video heroes, banner switch, /v1 /v2) is preserved on branch `portfolio/animated` and tag `portfolio-animated-v1`. Do not merge it back; deploy it separately for portfolio use.
 Open items are marked TODO in `src/content/site.ts` and pages. Do not publish the box's ISO claims until the client confirms them.
 
@@ -22,4 +22,7 @@ Read `node_modules/next/dist/docs/` before writing Next code; this version diffe
 ## Notes
 - Quote form posts to `src/app/api/quote/route.ts`. Set RESEND_API_KEY, QUOTE_TO_EMAIL, QUOTE_FROM_EMAIL (see `.env.example`); without them the form tells visitors nothing was sent.
 - Contact details in `src/content/site.ts` are PLACEHOLDERS (555 number, .example email); the footer shows a "Placeholder contact details" tag until `placeholder` is set to false.
+- Photography in `public/images/site/` is AI-generated (ChatGPT/Codex image set, masters in `design/generated/`, gitignored). Swap for a real Regan HD shoot when possible. The two real client photos are in `public/images/photos/`.
+- Logo: use `regan-hd-logo-tight.png` (whitespace trimmed); always on a white plate.
+- Turbopack dev here often serves stale `globals.css`; if CSS changes do not show, kill the dev server, `rm -rf .next`, restart.
 - Still open: real copy and client facts, real photos for part numbers, FR-CA.

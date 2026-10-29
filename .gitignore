@@ -44,3 +44,6 @@ next-env.d.ts
 # local review artifacts
 /screenshots
 /.playwright-mcp
+
+# raw generated image masters (web copies live in public/images/site)
+/design/generated/

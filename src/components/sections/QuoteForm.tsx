@@ -5,8 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { skus } from "@/content/site";
 
 const field =
-  "mt-1.5 h-12 w-full rounded-sm border border-[#83909e] bg-white px-3 text-base text-navy focus:border-regan-blue focus:outline-none focus:ring-2 focus:ring-regan-blue";
-const bad = "border-regan-red ring-1 ring-regan-red";
+  "mt-2 h-12 w-full rounded-[2px] border border-steel-200 bg-white px-3.5 text-[16px] text-text transition-[border-color,box-shadow] focus:border-blue-600 focus:outline-none focus:shadow-[0_0_0_3px_rgba(23,64,154,0.15)]";
+const bad = "border-red-600 shadow-[0_0_0_3px_rgba(200,16,46,0.12)]";
 
 type Status = { state: "idle" } | { state: "sending" } | { state: "sent"; delivered: boolean } | { state: "error"; message: string; fields: string[] };
 
@@ -46,7 +46,7 @@ export function QuoteForm() {
 
   if (status.state === "sent") {
     return (
-      <div role="status" className="border-l-4 border-regan-red py-2 pl-4 text-lg">
+      <div role="status" className="border-l-4 border-red-600 py-2 pl-4 text-lg">
         {status.delivered ? (
           <p>Quote request sent. We&apos;ll reply by email.</p>
         ) : (
@@ -57,9 +57,10 @@ export function QuoteForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2">
+    <form onSubmit={onSubmit} className="grid gap-5 sm:grid-cols-2">
+      <h2 className="text-[1.5rem] font-bold tracking-[-0.015em] sm:col-span-2">Quote request</h2>
       {status.state === "error" && (
-        <p role="alert" className="border-l-4 border-regan-red bg-regan-red/10 p-3 text-sm font-medium sm:col-span-2">
+        <p role="alert" className="border-l-4 border-red-600 bg-red-600/5 p-3 text-sm font-medium sm:col-span-2">
           {status.message}
         </p>
       )}
@@ -70,23 +71,23 @@ export function QuoteForm() {
           <input type="text" name="website" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
-      <label className="text-[0.9375rem] font-semibold">
+      <label className="text-[14px] font-medium text-text">
         Name
         <input required name="name" autoComplete="name" className={`${field} ${errs.includes("name") ? bad : ""}`} />
       </label>
-      <label className="text-[0.9375rem] font-semibold">
+      <label className="text-[14px] font-medium text-text">
         Company
         <input name="company" autoComplete="organization" className={field} />
       </label>
-      <label className="text-[0.9375rem] font-semibold">
+      <label className="text-[14px] font-medium text-text">
         Email
         <input required type="email" name="email" autoComplete="email" className={`${field} ${errs.includes("email") ? bad : ""}`} />
       </label>
-      <label className="text-[0.9375rem] font-semibold">
+      <label className="text-[14px] font-medium text-text">
         Phone
         <input type="tel" name="phone" autoComplete="tel" className={field} />
       </label>
-      <label className="text-[0.9375rem] font-semibold">
+      <label className="text-[14px] font-medium text-text">
         I need
         <select key={type} name="type" className={field} defaultValue={type}>
           <option value="new">New Marathon parts</option>
@@ -94,7 +95,7 @@ export function QuoteForm() {
           <option value="other">Something else</option>
         </select>
       </label>
-      <label className="text-[0.9375rem] font-semibold">
+      <label className="text-[14px] font-medium text-text">
         Part number
         <select key={sku} name="sku" className={field} defaultValue={sku}>
           <option value="">Not sure yet</option>
@@ -105,11 +106,11 @@ export function QuoteForm() {
           ))}
         </select>
       </label>
-      <label className="text-[0.9375rem] font-semibold">
+      <label className="text-[14px] font-medium text-text">
         Quantity
         <input name="qty" type="number" inputMode="numeric" min={1} max={100000} className={`${field} ${errs.includes("qty") ? bad : ""}`} />
       </label>
-      <label className="text-[0.9375rem] font-semibold">
+      <label className="text-[14px] font-medium text-text">
         Cores for refurbishing
         <select name="cores" className={field} defaultValue="none">
           <option value="none">No cores yet</option>
@@ -117,16 +118,16 @@ export function QuoteForm() {
           <option value="ready">Cores ready to ship</option>
         </select>
       </label>
-      <label className="text-[0.9375rem] font-semibold sm:col-span-2">
+      <label className="text-[14px] font-medium text-text sm:col-span-2">
         Details
-        <textarea name="details" rows={4} className={`${field} h-auto py-3`} />
+        <textarea name="details" rows={4} className={`${field} h-auto py-3 font-mono text-[15px]`} placeholder="Part numbers, quantities, cores on hand..." />
       </label>
       <button
         type="submit"
         disabled={status.state === "sending"}
-        className="h-12 rounded-sm bg-regan-red px-6 font-semibold text-white hover:bg-regan-red-dark disabled:opacity-60 sm:col-span-2 sm:justify-self-start"
+        className="mt-2 inline-flex h-12 items-center justify-center gap-2 rounded-[2px] bg-red-600 px-6 text-[15px] font-semibold text-white transition-colors hover:bg-red-700 disabled:opacity-60 sm:col-span-2"
       >
-        {status.state === "sending" ? "Sending..." : "Send quote request"}
+        {status.state === "sending" ? "Sending..." : <>Send quote request <span className="arrow" aria-hidden>→</span></>}
       </button>
     </form>
   );
