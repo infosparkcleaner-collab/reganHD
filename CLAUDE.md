@@ -25,4 +25,6 @@ Read `node_modules/next/dist/docs/` before writing Next code; this version diffe
 - Photography in `public/images/site/` is AI-generated (ChatGPT/Codex image set, masters in `design/generated/`, gitignored). Swap for a real Regan HD shoot when possible. The two real client photos are in `public/images/photos/`.
 - Logo: use `regan-hd-logo-tight.png` (whitespace trimmed); always on a white plate.
 - Turbopack dev here often serves stale `globals.css`; if CSS changes do not show, kill the dev server, `rm -rf .next`, restart.
+- SEO/AEO: per-page metadata via `pageMetadata()` in `src/lib/seo.ts` (title, description <=160 chars, canonical, OG/Twitter incl. image). JSON-LD via `<JsonLd>`: Organization + WebSite (layout), FAQPage (home, from `faqs` in site.ts), Service, ItemList, ContactPage, BreadcrumbList. `robots.ts` allows search and AI crawlers, `sitemap.ts`, `llms.txt` route. Set NEXT_PUBLIC_SITE_URL to the real domain in production. When the client confirms address/phone, add them to the Organization node (or LocalBusiness) and Google Business Profile.
+- Git push: the bundled git's credential selector hangs. Push with `"/c/Program Files/Git/cmd/git.exe" -c credential.helper= -c credential.helper=manager push` (remote URL carries the infosparkcleaner-collab username).
 - Still open: real copy and client facts, real photos for part numbers, FR-CA.

@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { abs, breadcrumb, pageMetadata, siteUrl } from "@/lib/seo";
 import Image from "next/image";
 import { img, processFacts, shoeStages } from "@/content/site";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Eyebrow } from "@/components/brand/Eyebrow";
 
-export const metadata: Metadata = {
-  title: "Brake shoe rebuilding",
-  description: "Regan HD sandblasts, relines and rivets heavy-duty brake shoes. See how a worn core becomes a boxed, ready-to-fit kit.",
-  alternates: { canonical: "/services" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Brake Shoe Rebuilding & Relining",
+  description:
+    "How Regan HD rebuilds heavy-duty brake shoe cores: sandblasted to bare steel, relined with new friction material, riveted on the press and boxed for fleets.",
+  path: "/services",
+});
 
 const W = "mx-auto w-full max-w-[1280px] px-5 md:px-8";
 const H2 = "text-[1.875rem] font-bold leading-[1.12] tracking-[-0.015em] md:text-[2.5rem] md:leading-[1.15]";
@@ -17,9 +20,25 @@ const H2 = "text-[1.875rem] font-bold leading-[1.12] tracking-[-0.015em] md:text
 export default function Services() {
   return (
     <>
+      <JsonLd
+        data={[
+          {
+            "@type": "Service",
+            "@id": `${siteUrl}/services#service`,
+            name: "Heavy-duty brake shoe rebuilding",
+            serviceType: "Brake shoe relining and rebuilding",
+            description: "Worn heavy-duty brake shoe cores are sandblasted to bare steel, relined with new friction material, riveted and packed in Marathon Stop Box Kits.",
+            provider: { "@id": `${siteUrl}/#organization` },
+            areaServed: { "@type": "Country", name: "Canada" },
+            audience: { "@type": "BusinessAudience", audienceType: "Fleet maintenance, heavy-duty repair shops, parts distributors" },
+            url: abs("/services"),
+          },
+          breadcrumb("Brake Shoe Rebuilding", "/services"),
+        ]}
+      />
       <PageHero
         eyebrow="Services"
-        title="Brake shoe rebuilding."
+        title="Heavy-duty brake shoe rebuilding."
         lead="Worn heavy-duty brake shoe cores, stripped to bare steel, relined with new friction material, riveted and boxed."
         image={img.sandblast}
         alt="A brake shoe being sandblasted inside a blast cabinet"

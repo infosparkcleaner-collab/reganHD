@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { abs, breadcrumb, pageMetadata, siteUrl } from "@/lib/seo";
 import Image from "next/image";
 import { Suspense } from "react";
 import { QuoteForm } from "@/components/sections/QuoteForm";
@@ -6,11 +8,12 @@ import { Eyebrow } from "@/components/brand/Eyebrow";
 import { SpeedRule } from "@/components/brand/SpeedRule";
 import { img, site } from "@/content/site";
 
-export const metadata: Metadata = {
-  title: "Contact and quotes",
-  description: "Request a quote from Regan HD by part number, or contact us about brake shoe rebuilding.",
-  alternates: { canonical: "/contact" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Request a Quote for Heavy-Duty Brake Shoes",
+  description:
+    "Request a quote by part number and quantity for rebuilt heavy-duty brake shoes or Marathon Stop Box Kits. Regan HD replies by email with price and availability.",
+  path: "/contact",
+});
 
 const W = "mx-auto w-full max-w-[1280px] px-5 md:px-8";
 
@@ -18,6 +21,12 @@ export default function Contact() {
   const c = site.contact;
   return (
     <>
+      <JsonLd
+        data={[
+          { "@type": "ContactPage", name: "Request a quote", url: abs("/contact"), about: { "@id": `${siteUrl}/#organization` } },
+          breadcrumb("Contact", "/contact"),
+        ]}
+      />
       <section className="grain relative bg-ink-900 text-white">
         <div className={`${W} pb-48 pt-44 md:pb-56 md:pt-48`}>
           <Eyebrow dark>Contact</Eyebrow>

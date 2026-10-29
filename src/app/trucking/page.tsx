@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumb, pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { img } from "@/content/site";
 import { PageHero } from "@/components/sections/PageHero";
 import { Eyebrow } from "@/components/brand/Eyebrow";
 import { CtaBand } from "@/components/sections/CtaBand";
 
-export const metadata: Metadata = {
-  title: "Trucking",
-  description: "Regan HD is part of a Canadian trucking business. We focus on brake parts that fit right and ship fast.",
-  alternates: { canonical: "/trucking" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Trucking and Fleet Brake Parts",
+  description:
+    "Regan HD is part of a Canadian trucking business, so we know what downtime costs. Ask about fleet pricing and repeat orders on rebuilt heavy-duty brake shoes.",
+  path: "/trucking",
+});
 
 const W = "mx-auto w-full max-w-[1280px] px-5 md:px-8";
 const H2 = "text-[1.875rem] font-bold leading-[1.12] tracking-[-0.015em] md:text-[2.5rem] md:leading-[1.15]";
@@ -24,6 +27,7 @@ const points = [
 export default function Trucking() {
   return (
     <>
+      <JsonLd data={[breadcrumb("Trucking", "/trucking")]} />
       <PageHero
         eyebrow="Trucking"
         title="Freight, handled by the same team."

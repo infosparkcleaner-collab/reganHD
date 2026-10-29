@@ -59,3 +59,35 @@ export const audiences = [
   { t: "Heavy-duty repair shops", d: "Boxed kits ready for the bay, so a brake job is not waiting on parts." },
   { t: "Parts distributors", d: "Repeat orders of Marathon Stop Box Kits, packed and shipped from Canada." },
 ] as const;
+
+// Answers written from confirmed facts only (used on the home page and in FAQPage structured data).
+export const faqs = [
+  {
+    q: "What does Regan HD do?",
+    a: "Regan HD rebuilds heavy-duty truck brake shoes in Canada. Worn shoes (cores) are sandblasted to bare steel, relined with new friction material and riveted, then packed in Marathon Stop Box Kits for fleets, repair shops and parts distributors. Regan HD is also part of a Canadian trucking business.",
+  },
+  {
+    q: "How is a heavy-duty brake shoe rebuilt?",
+    a: "In four stages: the worn core comes in, it is sandblasted to bare steel, new friction material is fitted and riveted on the press, and the finished shoe is inspected and packed in a Marathon Stop Box Kit.",
+  },
+  {
+    q: "What is a brake shoe core?",
+    a: "A core is a used brake shoe sent back for rebuilding. The steel shoe is kept; the worn lining is stripped off and replaced with new friction material.",
+  },
+  {
+    q: "What is the Marathon Stop Box Kit?",
+    a: "A heavy-duty brake shoe kit from Marathon Brake Systems, packed and shipped by Regan HD. The box is marked \u201cAssembled in Canada\u201d.",
+  },
+  {
+    q: "Which part numbers can I order?",
+    a: `Marathon part numbers ${skus.slice(0, -1).join(", ")} and ${skus[skus.length - 1]}. Specs, fitment and pricing are available on request.`,
+  },
+  {
+    q: "How do I get a quote?",
+    a: "Send the part numbers and quantities you need through the quote form, and tell us if you have cores to send. Regan HD replies by email with price and availability.",
+  },
+  {
+    q: "Who does Regan HD work with?",
+    a: "Fleet maintenance teams, heavy-duty repair shops and parts distributors.",
+  },
+] as const;

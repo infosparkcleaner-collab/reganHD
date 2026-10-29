@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { abs, breadcrumb, pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { img, skus } from "@/content/site";
@@ -6,11 +8,12 @@ import { Eyebrow } from "@/components/brand/Eyebrow";
 import { Button } from "@/components/brand/Button";
 import { SpeedRule } from "@/components/brand/SpeedRule";
 
-export const metadata: Metadata = {
-  title: "Products",
-  description: "Marathon Stop Box Kits and heavy-duty brake shoe part numbers, packed and shipped by Regan HD.",
-  alternates: { canonical: "/products" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Marathon Stop Box Kits & Brake Shoe Part Numbers",
+  description:
+    "Marathon Stop Box Kit heavy-duty brake shoe kits, packed and shipped by Regan HD. Part numbers 4707, 4709, 4711, 4719, 4720, 4702 and 4515. Request a quote.",
+  path: "/products",
+});
 
 const W = "mx-auto w-full max-w-[1280px] px-5 md:px-8";
 const H2 = "text-[1.875rem] font-bold leading-[1.12] tracking-[-0.015em] md:text-[2.5rem] md:leading-[1.15]";
@@ -18,6 +21,17 @@ const H2 = "text-[1.875rem] font-bold leading-[1.12] tracking-[-0.015em] md:text
 export default function Products() {
   return (
     <>
+      <JsonLd
+        data={[
+          {
+            "@type": "ItemList",
+            name: "Marathon Stop Box Kit part numbers",
+            numberOfItems: skus.length,
+            itemListElement: skus.map((sku, i) => ({ "@type": "ListItem", position: i + 1, name: `Marathon Stop Box Kit ${sku}`, url: abs(`/contact?sku=${sku}`) })),
+          },
+          breadcrumb("Products", "/products"),
+        ]}
+      />
       <section className="bg-white pt-[100px] md:pt-[112px]">
         <div className={`${W} grid items-center gap-12 py-16 md:py-24 lg:grid-cols-12`}>
           <div className="lg:col-span-5">

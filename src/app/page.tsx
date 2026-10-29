@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { audiences, img, shoeStages, skus } from "@/content/site";
@@ -5,6 +6,16 @@ import { Button } from "@/components/brand/Button";
 import { Eyebrow } from "@/components/brand/Eyebrow";
 import { SpeedRule } from "@/components/brand/SpeedRule";
 import { ProcessFacts } from "@/components/sections/ProcessFacts";
+import { Faq } from "@/components/sections/Faq";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Heavy-Duty Brake Shoe Rebuilding in Canada | Regan HD",
+  description:
+    "Regan HD rebuilds heavy-duty truck brake shoes in Canada: sandblasted, relined and riveted, then shipped in Marathon Stop Box Kits. Quotes by part number.",
+  path: "/",
+  absoluteTitle: true,
+});
 
 const W = "mx-auto w-full max-w-[1280px] px-5 md:px-8";
 const H2 = "text-[1.875rem] font-bold leading-[1.12] tracking-[-0.015em] md:text-[2.5rem] md:leading-[1.15]";
@@ -16,7 +27,7 @@ export default function Home() {
       <section className="grain relative flex min-h-[640px] items-center overflow-hidden bg-ink-950 text-white md:min-h-[92vh]">
         <Image
           src={img.heroShop}
-          alt="The Regan HD rebuild shop: racks of rebuilt brake shoes, a sandblasting cabinet and a riveting press"
+          alt="A heavy-duty brake shoe rebuild shop with racks of relined shoes, a sandblasting cabinet and a riveting press"
           fill
           loading="eager" fetchPriority="high"
           sizes="100vw"
@@ -27,9 +38,10 @@ export default function Home() {
         <div className="absolute inset-0 -z-10 bg-ink-950/55 md:hidden" aria-hidden />
         <div className={`${W} pb-32 pt-44 md:pb-40`}>
           <div className="max-w-[640px]">
-            <Eyebrow dark>Heavy-duty brake shoes</Eyebrow>
-            <h1 className="display-x mt-6 text-[2.75rem] font-extrabold leading-[1.06] md:text-[4.5rem] md:leading-[1.04]">
-              Rebuilt to stop. Built in Canada.
+            {/* The eyebrow is part of the H1 so the heading carries the search phrase, not just the slogan. */}
+            <h1>
+              <span className="eyebrow font-sans text-steel-300">Heavy-duty brake shoe rebuilding</span>
+              <span className="display-x mt-6 block text-[2.75rem] font-extrabold leading-[1.06] md:text-[4.5rem] md:leading-[1.04]">Rebuilt to stop. Built in Canada.</span>
             </h1>
             <SpeedRule className="draw mt-7 text-blue-400" />
             <p className="mt-7 max-w-[52ch] text-lg leading-relaxed text-steel-300 md:text-xl">
@@ -147,9 +159,11 @@ export default function Home() {
         </div>
       </section>
 
+      <Faq />
+
       {/* Trucking teaser */}
       <section className="grain relative flex min-h-[60vh] items-center overflow-hidden bg-ink-950 text-white">
-        <Image src={img.truck} alt="A Regan HD semi truck on a Canadian highway at dawn" fill sizes="100vw" className="-z-20 object-cover object-[70%_50%]" />
+        <Image src={img.truck} alt="A semi truck on a Canadian highway at dawn" fill sizes="100vw" className="-z-20 object-cover object-[70%_50%]" />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(7,13,26,.85)_0%,rgba(7,13,26,.5)_35%,rgba(7,13,26,0)_55%)]" aria-hidden />
         <div className={`${W} py-24`}>
           <div className="max-w-[460px]" data-reveal>
