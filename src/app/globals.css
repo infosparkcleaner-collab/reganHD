@@ -139,17 +139,6 @@
   --font-display: var(--font-chakra);
 }
 
-/* Slanted stripe motif taken from the Regan HD logo */
-.stripes {
-  background-image: repeating-linear-gradient(
-    -45deg,
-    currentColor 0 6px,
-    transparent 6px 14px
-  );
-}
-.cut-corner {
-  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
-}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
@@ -157,35 +146,6 @@
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body { background: #ffffff; }
-
-/* Slanted bar rule echoing the stripes in the Regan HD logo */
-.slash-rule {
-  background:
-    repeating-linear-gradient(-60deg, #c8102e 0 14px, transparent 14px 28px) left / 36% 100% no-repeat,
-    linear-gradient(#17409a, #17409a) right / 61% 100% no-repeat;
-  background-color: #fff; /* white gap keeps red and blue from touching */
-}
-
-@keyframes blast {
-  from { transform: translate(0, 0); opacity: 0.95; }
-  to { transform: translate(var(--dx), var(--dy)); opacity: 0; }
-}
-@keyframes drift {
-  from { transform: scale(1.04) translate3d(0, 0, 0); }
-  to { transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
-}
-.drift { animation: drift 24s ease-in-out infinite alternate; }
-@media (prefers-reduced-motion: reduce) { .drift { animation: none; } }
-
-/* Lenis smooth scroll */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-stopped { overflow: hidden; }
-
-/* Slanted red bars from the Regan HD logo, used as a ticker separator */
-.slash-bars {
-  background: repeating-linear-gradient(-60deg, #c8102e 0 22%, transparent 22% 44%);
-}
 
 /* v5 bright palette: logo blue + logo red + hazard yellow */
 @theme inline {

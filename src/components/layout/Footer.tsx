@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { navShoes, site } from "@/content/site";
+import Link from "next/link";
+import { nav, site } from "@/content/site";
 
 export function Footer() {
   const c = site.contact;
@@ -7,7 +8,7 @@ export function Footer() {
     <footer className="border-t-4 border-hazard bg-navy text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-[1.2fr_1fr_1.2fr]">
         <div>
-          <div className="cut-corner inline-block bg-white px-4 py-1.5">
+          <div className="inline-block bg-white px-4 py-1.5">
             <Image src="/images/brand/regan-hd-logo.jpeg" alt="Regan HD" width={140} height={70} className="h-12 w-auto" />
           </div>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/70">{site.tagline}</p>
@@ -15,18 +16,13 @@ export function Footer() {
 
         <nav aria-label="Footer">
           <ul className="space-y-2 text-sm">
-            {navShoes.map((n) => (
+            {nav.map((n) => (
               <li key={n.href}>
-                <a href={n.href} className="text-white/80 hover:text-hazard">
+                <Link href={n.href} className="text-white/80 hover:text-hazard">
                   {n.label}
-                </a>
+                </Link>
               </li>
             ))}
-            <li>
-              <a href="#quote" className="font-semibold text-hazard">
-                Request a quote
-              </a>
-            </li>
           </ul>
         </nav>
 
