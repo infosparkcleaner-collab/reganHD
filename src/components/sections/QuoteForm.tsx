@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { skus } from "@/content/site";
 
 const field =
-  "mt-1.5 w-full border border-[#66759A] bg-white px-3 py-3 text-base text-navy focus:border-regan-blue focus:outline-none focus:ring-2 focus:ring-regan-blue";
+  "mt-1.5 h-12 w-full rounded-sm border border-[#83909e] bg-white px-3 text-base text-navy focus:border-regan-blue focus:outline-none focus:ring-2 focus:ring-regan-blue";
 const bad = "border-regan-red ring-1 ring-regan-red";
 
 type Status = { state: "idle" } | { state: "sending" } | { state: "sent"; delivered: boolean } | { state: "error"; message: string; fields: string[] };
@@ -70,23 +70,23 @@ export function QuoteForm() {
           <input type="text" name="website" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
-      <label className="text-sm font-medium">
+      <label className="text-[0.9375rem] font-semibold">
         Name
         <input required name="name" autoComplete="name" className={`${field} ${errs.includes("name") ? bad : ""}`} />
       </label>
-      <label className="text-sm font-medium">
+      <label className="text-[0.9375rem] font-semibold">
         Company
         <input name="company" autoComplete="organization" className={field} />
       </label>
-      <label className="text-sm font-medium">
+      <label className="text-[0.9375rem] font-semibold">
         Email
         <input required type="email" name="email" autoComplete="email" className={`${field} ${errs.includes("email") ? bad : ""}`} />
       </label>
-      <label className="text-sm font-medium">
+      <label className="text-[0.9375rem] font-semibold">
         Phone
         <input type="tel" name="phone" autoComplete="tel" className={field} />
       </label>
-      <label className="text-sm font-medium">
+      <label className="text-[0.9375rem] font-semibold">
         I need
         <select key={type} name="type" className={field} defaultValue={type}>
           <option value="new">New Marathon parts</option>
@@ -94,7 +94,7 @@ export function QuoteForm() {
           <option value="other">Something else</option>
         </select>
       </label>
-      <label className="text-sm font-medium">
+      <label className="text-[0.9375rem] font-semibold">
         Part number
         <select key={sku} name="sku" className={field} defaultValue={sku}>
           <option value="">Not sure yet</option>
@@ -105,11 +105,11 @@ export function QuoteForm() {
           ))}
         </select>
       </label>
-      <label className="text-sm font-medium">
+      <label className="text-[0.9375rem] font-semibold">
         Quantity
         <input name="qty" type="number" inputMode="numeric" min={1} max={100000} className={`${field} ${errs.includes("qty") ? bad : ""}`} />
       </label>
-      <label className="text-sm font-medium">
+      <label className="text-[0.9375rem] font-semibold">
         Cores for refurbishing
         <select name="cores" className={field} defaultValue="none">
           <option value="none">No cores yet</option>
@@ -117,14 +117,14 @@ export function QuoteForm() {
           <option value="ready">Cores ready to ship</option>
         </select>
       </label>
-      <label className="text-sm font-medium sm:col-span-2">
+      <label className="text-[0.9375rem] font-semibold sm:col-span-2">
         Details
-        <textarea name="details" rows={4} className={field} />
+        <textarea name="details" rows={4} className={`${field} h-auto py-3`} />
       </label>
       <button
         type="submit"
         disabled={status.state === "sending"}
-        className="bg-regan-red px-7 py-4 font-display text-lg font-semibold text-white hover:bg-navy disabled:opacity-60 sm:col-span-2 sm:justify-self-start"
+        className="h-12 rounded-sm bg-regan-red px-6 font-semibold text-white hover:bg-regan-red-dark disabled:opacity-60 sm:col-span-2 sm:justify-self-start"
       >
         {status.state === "sending" ? "Sending..." : "Send quote request"}
       </button>

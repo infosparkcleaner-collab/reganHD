@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Chakra_Petch, IBM_Plex_Sans } from "next/font/google";
+import { Libre_Franklin, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
-const display = Chakra_Petch({ variable: "--font-chakra", subsets: ["latin"], weight: ["500", "600", "700"] });
-const body = IBM_Plex_Sans({ variable: "--font-plex", subsets: ["latin"], weight: ["400", "500", "600"] });
+const head = Libre_Franklin({ variable: "--font-head", subsets: ["latin"], weight: ["600", "700"] });
+const body = Source_Sans_3({ variable: "--font-body", subsets: ["latin"], weight: ["400", "600"] });
 
 // NEXT_PUBLIC_SITE_URL wins; on Vercel the production domain is used automatically.
 const siteUrl =
@@ -36,7 +36,7 @@ const organization = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-CA" className={`${display.variable} ${body.variable} h-full antialiased`}>
+    <html lang="en-CA" className={`${head.variable} ${body.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-white text-navy">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }} />
         <Header />

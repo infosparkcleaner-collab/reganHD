@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Image from "next/image";
 import { PageHeading } from "@/components/sections/PageHeading";
+import { CtaButton } from "@/components/ui/CtaButton";
 import { shoeStages } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -13,22 +14,25 @@ export default function Services() {
   return (
     <>
       <PageHeading title="Brake shoe rebuilding" intro="We take worn heavy-duty brake shoe cores and rebuild them: cleaned to bare steel, relined, riveted and boxed." />
-      <section className="mx-auto max-w-4xl px-5 py-16">
+      <section className="mx-auto grid max-w-6xl gap-12 px-5 py-14 md:px-6 md:py-20 lg:grid-cols-[1.2fr_1fr]">
         {/* TODO: client to confirm real steps and wording */}
-        <ol className="space-y-8">
+        <ol>
           {shoeStages.map((s, i) => (
-            <li key={s.title} className="flex gap-5 border-b border-navy/10 pb-8 last:border-0">
-              <span className="font-display text-4xl font-bold text-regan-red">{i + 1}</span>
+            <li key={s.title} className="flex gap-5 border-b border-rule py-7 first:pt-0 last:border-0">
+              <span className="font-display w-8 shrink-0 text-2xl font-semibold text-slate">{i + 1}</span>
               <div>
-                <h2 className="font-display text-2xl font-semibold">{s.title}</h2>
-                <p className="mt-2 text-lg leading-relaxed text-navy/80">{s.text}</p>
+                <h2 className="text-xl">{s.title}</h2>
+                <p className="mt-2 text-slate">{s.text}</p>
               </div>
             </li>
           ))}
         </ol>
-        <Link href="/contact?type=refurbish" className="mt-4 inline-block bg-regan-red px-7 py-3.5 font-display text-lg font-semibold text-white hover:bg-navy">
-          Get a rebuild quote
-        </Link>
+        <div>
+          <Image src="/images/photos/worker-brake-shoe.jpeg" alt="A Regan HD worker pressing a relined brake shoe" width={1200} height={800} sizes="(min-width: 1024px) 440px, 100vw" className="h-auto w-full rounded-sm" />
+          <div className="mt-8">
+            <CtaButton href="/contact?type=refurbish">Get a rebuild quote</CtaButton>
+          </div>
+        </div>
       </section>
     </>
   );
